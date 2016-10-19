@@ -19,7 +19,7 @@ namespace Lesson6
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             //redirect back tot he students page
-            Response.Redirect("~/Students.aspx");
+            Response.Redirect("~/Contoso/Students.aspx");
         }
 
         protected void SaveButton_Click(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace Lesson6
                 db.SaveChanges();
 
                 //redirect back to students page
-                Response.Redirect("~/Students.aspx");
+                Response.Redirect("~/Contoso/Students.aspx");
             }
         }
     }
