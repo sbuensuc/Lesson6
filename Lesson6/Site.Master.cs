@@ -6,13 +6,33 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+
+
 namespace Lesson6
 {
     public partial class Site : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine(Page.Title + " loaded ...");
+            if(!IsPostBack)
+            {
+                //chekc if a user is checked in
+                if(HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    //show the contoso content area
+                    ContosoPlaceHolder.Visible = true;
+                    PublicPlaceHolder.Visible = false;
+                }
+                else
+                {
+                    //only login and register
+                    ContosoPlaceHolder.Visible = false;
+                    PublicPlaceHolder.Visible = true;
+                }
+            }
             SetActivePage();
         }
 
@@ -31,9 +51,6 @@ namespace Lesson6
                     break;
                 case "Departments":
                     departments.Attributes.Add("class", "active");
-                    break;
-                case "Enrollments":
-                    enrollments.Attributes.Add("class", "active");
                     break;
                 case "About":
                     about.Attributes.Add("class", "active");
